@@ -1,16 +1,31 @@
-# whatsapp_live_caption
+# 🔱 Vyom - Tool to Prevent Digital Arrest on WhatsApp 
 
-A new Flutter project.
+![Animated GIF](https://i.gifer.com/J4o.gif)
 
-## Getting Started
+## ❌ Problem
+As we move into a digital era,the country is going through the transition having
+significant increase in digital Arrests on whatsApp that has increased emotional distress for both individuals and organizations.<br>
 
-This project is a starting point for a Flutter application.
+With the rise of digital transactions and online activities, scam activities have significantly increased, leading to:  
+- Financial loss and identity theft  
+- AI-powered scams that bypass traditional fraud detection  
+- Lack of awareness and support from authorities  
+- Complex and outdated scam resolution systems
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Solution
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🛠️ Features  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🔧 Tech Stack  
+The project is built using the following technologies:  
+
+- **Flutter** (for cross-platform development)  
+- **Dart** (programming language)  
+- **Firebase** (backend and real-time database)  
+- **Android Studio** (development environment)
+
+![Animated GIF](https://media1.giphy.com/media/l3mZnuz4coJp8EBBm/giphy.gif)
+
+
