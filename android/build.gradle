@@ -1,3 +1,47 @@
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//    dependencies{
+////        classpath "com.google.gms.google-services"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath "com.google.gms:google-services:4.4.2"
+////        classpath 'com.android.tools.build:gradle:7.3.0' // Use a valid Gradle version
+////        classpath 'com.google.gms:google-services:4.3.15' // Ensure this line is correct
+//    }
+//}
+//
+//rootProject.buildDir = "../build"
+//subprojects {
+//    project.buildDir = "${rootProject.buildDir}/${project.name}"
+//}
+//subprojects {
+//    project.evaluationDependsOn(":app")
+//}
+//
+//tasks.register("clean", Delete) {
+//    delete rootProject.buildDir
+//}
+//// plugins {
+////     id 'com.google.gms.google-services' version '4.4.2' apply false
+//// }
+//
+//------------------------
+buildscript {
+    ext.kotlin_version = '1.7.10' // ✅ Define Kotlin Version
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.3.0" // ✅ Ensure Gradle Version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // ✅ Use Kotlin Version
+        classpath "com.google.gms:google-services:4.4.2" // ✅ Google Services
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -6,10 +50,9 @@ allprojects {
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(":app")
 }
 

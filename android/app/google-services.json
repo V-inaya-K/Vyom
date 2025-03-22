@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22198765337",
+    "project_id": "vyom-93b76",
+    "storage_bucket": "vyom-93b76.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22198765337:android:21ba3f481108c8110a2788",
+        "android_client_info": {
+          "package_name": "com.example.whatsapp_live_caption"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7TJmiZkAtV36gSP6y2-P_g5j505XFwE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

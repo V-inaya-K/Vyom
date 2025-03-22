@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_live_caption/Authentication/signup.dart';
 import 'package:whatsapp_live_caption/services/overlay.dart';
 import 'package:whatsapp_live_caption/services/translation.dart';
 import 'package:whatsapp_live_caption/services/speech.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -80,95 +81,253 @@ class _HomeScreenState extends State<HomeScreen> {
       isListening = false;
     });
   }
+  bool isFocused = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage('https://imgs.search.brave.com/sfqVZvAxc_0V_vB1v-l7ljQaMeuWC5k1RRnVF_kbgc8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzJkL2Zl/LzZjLzJkZmU2Yzk2/ZThjODFhNjkwZGQ1/NDczNDE0MjY1ZDlk/LmpwZw'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar:AppBar(
+        backgroundColor: Color.fromARGB(197, 52, 146, 241), // Change as needed
+        title: Text(
+          "Vyom - One and Only Digital Arrest Detector",
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          )
         ),
-      ),
-      child: Scaffold(
-        appBar: AppBar(title: Text("Live Speech Transcription")),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Select Language:",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              DropdownButton<String>(
-                value: selectedLanguage,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedLanguage = newValue!;
-                  });
-                },
-                items: languages.entries.map((entry) {
-                  return DropdownMenuItem<String>(
-                    value: entry.value,
-                    child: Text(entry.key),
-                  );
-                }).toList(),
-              ),
-
-              SizedBox(height: 20),
-              Text(
-                "Transcribed Speech:",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(top: 5, bottom: 20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: isMalicious ? Colors.red : Colors.blue),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  transcribedText,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: isMalicious ? Colors.red : Colors.black, // Highlight malicious text in red
-                  ),
-                ),
-              ),
-
-              if (isMalicious) // Show warning message if malicious content detected
-                Text(
-                  "⚠️ Malicious Speech Detected!",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
-                ),
-
-              SizedBox(height: 10),
-              Text(
-                "Translated Speech:",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(top: 5, bottom: 20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.green),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  translatedText,
-                  style: TextStyle(fontSize: 16, color: Colors.green),
-                ),
-              ),
-
-              ElevatedButton(
-                onPressed: isListening ? stopTranslation : startTranslation,
-                child: Text(isListening ? "Stop" : "Start"),
-              ),
-            ],
+        actions: [
+          IconButton(
+            onPressed: () => _showPopup(context, ChatbotPopup()),
+            color: Colors.white,
+            icon: Icon(Icons.message),
           ),
-        ),
+          IconButton(
+            onPressed: () => _showPopup(context, NotificationsPopup()),
+            color: Colors.white,
+            icon: Icon(Icons.notifications),
+          ),
+          IconButton(
+            onPressed: () => _showPopup(context, ProfilePopup()),
+            color: Colors.white,
+            icon: Icon(Icons.account_circle_rounded),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+            },
+            icon: Icon(Icons.logout),
+            color: Colors.white,
+          ),
+        ],
       ),
+
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage('https://imgs.search.brave.com/0PPZHtca9KhsDYyYmI4n_BqcIERNo4WgEuZm0sI2tkA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvcHJldmll/dy0xeC85MS8xMS9w/YXN0ZWwtYmFja2dy/b3VuZC12ZWN0b3It/MjAxOTExMS5qcGc'),
+                fit: BoxFit.cover)
+        ),
+        child: Container(
+            margin: EdgeInsets.only(left: 40, right: 40),
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "home.png",
+                      width: 400,
+                      height: 200,
+                    ),
+
+                    Text(
+                      "Select Language:",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5,),
+                    SizedBox(
+                      width: 100,
+                      height: 30,
+                      child: Container(
+                        alignment: Alignment.topCenter,
+                        decoration: BoxDecoration(
+                          color: Colors.white, // Background color
+                          borderRadius: BorderRadius.circular(8), // Rounded corners
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: DropdownButton<String>(
+                          value: selectedLanguage,
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedLanguage = newValue!;
+                            });
+                          },
+                          items: languages.entries.map((entry) {
+                            return DropdownMenuItem<String>(
+                              value: entry.value,
+                              child: Text(entry.key),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+                    Text(
+                      "Transcribed Speech:",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(top: 5, bottom: 20),
+                      decoration: BoxDecoration(
+                        color:isMalicious ? Colors.grey[300] :Colors.grey[100],
+                        border: Border.all(color: isMalicious ? Colors.red : Colors.green),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        transcribedText,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: isMalicious ? Colors.red : Colors.black, // Highlight malicious text in red
+                        ),
+                      ),
+                    ),
+
+                    if(isMalicious) // Show warning message if malicious content detected
+                      Text(
+                        "⚠️ Malicious Speech Detected!",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                      )else(
+                    Text("Recognizing...",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent,)
+                    )),
+
+                    SizedBox(height: 10),
+                    Text(
+                      "Translated Speech:",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(top: 5, bottom: 20),
+                      decoration: BoxDecoration(
+                        color: isListening ? Colors.grey[200] :Colors.grey[100],
+                        border: Border.all(color: isListening ? Colors.blue : Colors.green),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                          translatedText,
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      ),
+
+                    SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
+                          ),
+                          onPressed: isListening ? stopTranslation : startTranslation,
+                          child: Text(isListening ? "Stop" : "Start",
+                              style: GoogleFonts.poppins(
+                                fontSize: 30,
+                                color: Colors.white
+                              ),),
+                          ),
+                        ),
+
+                  ],
+                ),
+              ),
+          ),
+      ),
+
+
     );
   }
 }
+
+void _showPopup(BuildContext context, Widget popup) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.transparent,
+        child: popup,
+      );
+    },
+  );
+}
+class ChatbotPopup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Colors.white,
+      child: Text("Chatbot Content"),
+    );
+  }
+}
+
+class NotificationsPopup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Colors.white,
+      child: Text("Notifications Content"),
+    );
+  }
+}
+
+class ProfilePopup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Colors.white,
+      child: Text("Profile Content"),
+    );
+  }
+}
+// ------------------------------------
+// Firebase Edition
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+//
+// class HomeScreen extends StatelessWidget {
+//   final User user;
+//   HomeScreen({required this.user});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Home Page")),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text("Welcome, ${user.email ?? user.phoneNumber}"),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: () async {
+//                 await FirebaseAuth.instance.signOut();
+//                 Navigator.pop(context);
+//               },
+//               child: Text("Logout"),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
